@@ -1,0 +1,28 @@
+h1 {
+    color: rgb(29, 137, 54);
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 60px;
+}
+
+p {
+    color: rgb(23, 40, 27);
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+ol {
+    color: rgb(227, 111, 17);
+}
+
+ul {
+    color: rgb(48, 21, 182);
+}
+
+span {
+    color: blue;
+}
+
+body {
+    background-color: antiquewhite;
+}
