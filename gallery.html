@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photography portfolio gallery - Browse photos by year">
+    <title>Gallery | Sawyer Perry Photography</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a href="index.html" class="logo" aria-label="Home">
+                <svg class="logo-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
+                    <path d="M149.1,64h37.9c5.6-16.4,21.3-28,39.6-28h58.8c18.4,0,34,11.6,39.6,28h37.9c27.3,0,49.5,22.2,49.5,49.5v259 c0,27.3-22.2,49.5-49.5,49.5H149.1c-27.3,0-49.5-22.2-49.5-49.5v-259C99.5,86.2,121.8,64,149.1,64z M256,140c-57.4,0-104,46.6-104,104 s46.6,104,104,104s104-46.6,104-104S313.4,140,256,140z M256,316c-39.7,0-72-32.3-72-72s32.3-72,72-72s72,32.3,72,72 S295.7,316,256,316z M368,112c-8.8,0-16,7.2-16,16s7.2,16,16,16s16-7.2,16-16S376.8,112,368,112z"/>
+                </svg>
+                <span class="logo-text">Sawyer Perry Photography</span>
+            </a>
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span class="hamburger"></span>
+            </button>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="gallery.html" class="active">Gallery</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="gallery-2021.html">2021</a></li>
+                        <li><a href="gallery-2020.html">2020</a></li>
+                        <li><a href="gallery-2019.html">2019</a></li>
+                        <li><a href="gallery-2018.html">2018</a></li>
+                    </ul>
+                </li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <div class="container">
+            <h1>Photography Gallery</h1>
+            <p>Explore my work organized by year</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content">
+    <section class="section year-selector-section">
+        <div class="container">
+            <h2 class="section-title">Select a Year</h2>
+            <p class="section-subtitle">Browse my photography collections by year</p>
+            <div class="year-grid" id="year-grid"></div>
+        </div>
+    </section>
+
+    <section class="section gallery-section">
+        <div class="container">
+            <h2 class="section-title">Recent Highlights</h2>
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sawyer Perry Photography</h3>
+                    <p>Capturing your moments the way you want.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Gallery by Year</h3>
+                    <ul>
+                        <li><a href="gallery-2021.html">2021</a></li>
+                        <li><a href="gallery-2020.html">2020</a></li>
+                        <li><a href="gallery-2019.html">2019</a></li>
+                        <li><a href="gallery-2018.html">2018</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Me</h3>
+                    <div class="social-links">
+                        <a href="https://youtu.be/dQw4w9WgXcQ?si=E8cQ9q-XC5YgyyUu" aria-label="Instagram" class="social-link" target="_blank" rel="noopener">
+                            <img src="images/svgs/insta.svg" alt="Instagram" class="social-svg" />
+                        </a>
+                        <a href="https://youtu.be/dQw4w9WgXcQ?si=E8cQ9q-XC5YgyyUu" aria-label="LinkedIn" class="social-link" target="_blank" rel="noopener">
+                            <img src="images/svgs/linkedin.svg" alt="LinkedIn" class="social-svg" />
+                        </a>
+                        <a href="https://youtu.be/dQw4w9WgXcQ?si=E8cQ9q-XC5YgyyUu" aria-label="X" class="social-link" target="_blank" rel="noopener">
+                            <img src="images/svgs/X.svg" alt="X" class="social-svg" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sawyer Perry Photography. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Image Modal -->
+    <div class="modal" id="imageModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <img class="modal-content" id="modalImage" alt="">
+        <div class="modal-caption" id="modalTitle"></div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+
+</html>
