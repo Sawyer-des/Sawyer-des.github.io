@@ -1075,6 +1075,11 @@ button {
         --spacing-xl: 4rem;
     }
     
+    /* Fix background scrolling issue on mobile */
+    body, .hero {
+        background-attachment: scroll !important;
+    }
+    
     .nav-toggle {
         display: flex;
         align-items: center;
