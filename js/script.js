@@ -359,6 +359,51 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Keyboard navigation for dropdowns
+    const dropdowns = document.querySelectorAll('.dropdown');
+    dropdowns.forEach(dropdown => {
+        const dropdownLink = dropdown.querySelector('a');
+        const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+        
+        if (dropdownLink && dropdownMenu) {
+            dropdownLink.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dropdownMenu.classList.toggle('show');
+                    const firstLink = dropdownMenu.querySelector('a');
+                    if (firstLink && dropdownMenu.classList.contains('show')) {
+                        firstLink.focus();
+                    }
+                } else if (e.key === 'Escape') {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+            
+            const menuLinks = dropdownMenu.querySelectorAll('a');
+            menuLinks.forEach((link, index) => {
+                link.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        e.preventDefault();
+                        dropdownMenu.classList.remove('show');
+                        dropdownLink.focus();
+                    } else if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const nextLink = menuLinks[index + 1];
+                        if (nextLink) nextLink.focus();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        const prevLink = menuLinks[index - 1];
+                        if (prevLink) {
+                            prevLink.focus();
+                        } else {
+                            dropdownLink.focus();
+                        }
+                    }
+                });
+            });
+        }
+    });
+    
     // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {

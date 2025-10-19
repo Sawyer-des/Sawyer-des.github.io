@@ -1,0 +1,6 @@
+# Robots.txt for Sawyer Perry Photography
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://sawyer-des.github.io/sitemap.xml
