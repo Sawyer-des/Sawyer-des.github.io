@@ -692,21 +692,27 @@ button {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 2.5rem;
+    gap: clamp(1rem, 3vw, 2.5rem);
     margin-bottom: 1.5rem;
+    flex-wrap: wrap;
 }
 .about-stat {
     text-align: center;
+    min-width: 100px;
+    flex: 0 1 auto;
 }
 .about-stat-number {
     display: block;
-    font-size: 2.2rem;
+    font-size: clamp(1.8rem, 3vw, 2.2rem);
     font-weight: bold;
     color: #212529;
 }
 
 .about-stat-label {
     color: #343A40;
+    font-size: clamp(0.7rem, 1.5vw, 0.95rem);
+    display: block;
+    padding: 0 0.25rem;
 }
 
 .about-grid {

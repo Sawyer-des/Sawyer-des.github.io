@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', function() {
             navMenu.classList.toggle('active');
         });
         
-        const navLinks = document.querySelectorAll('.nav-menu a');
+        const navLinks = document.querySelectorAll('.nav-menu a:not(.dropdown > a)');
         navLinks.forEach(link => {
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
@@ -359,13 +359,36 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Keyboard navigation for dropdowns
+    // Mobile touch support for dropdowns
     const dropdowns = document.querySelectorAll('.dropdown');
     dropdowns.forEach(dropdown => {
         const dropdownLink = dropdown.querySelector('a');
         const dropdownMenu = dropdown.querySelector('.dropdown-menu');
         
         if (dropdownLink && dropdownMenu) {
+            // Handle click/touch on mobile to toggle dropdown instead of navigate
+            dropdownLink.addEventListener('click', function(e) {
+                // Check if mobile menu is active (viewport < 768px)
+                const isMobile = window.innerWidth < 768;
+                
+                if (isMobile) {
+                    e.preventDefault();
+                    e.stopPropagation(); // Prevent event from bubbling
+                    dropdownMenu.classList.toggle('show');
+                }
+            });
+            
+            // Close dropdown when clicking a year link
+            const yearLinks = dropdownMenu.querySelectorAll('a');
+            yearLinks.forEach(yearLink => {
+                yearLink.addEventListener('click', function() {
+                    dropdownMenu.classList.remove('show');
+                    navMenu.classList.remove('active');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+            
+            // Keyboard navigation for dropdowns
             dropdownLink.addEventListener('keydown', function(e) {
                 if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
