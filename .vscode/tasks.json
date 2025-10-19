@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "validate-html-links",
+			"type": "shell",
+			"command": "powershell",
+			"args": [
+				"-NoProfile",
+				"-Command",
+				"Write-Output 'Updated dropdowns with All Galleries link in index, contact, gallery, gallery-2018..2021'"
+			]
+		}
+	]
+}

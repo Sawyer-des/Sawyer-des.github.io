@@ -343,18 +343,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const navToggle = document.querySelector('.nav-toggle');
     const navMenu = document.querySelector('.nav-menu');
     
-    if (navToggle) {
-        navToggle.addEventListener('click', function() {
-            const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
-            navToggle.setAttribute('aria-expanded', !isExpanded);
-            navMenu.classList.toggle('active');
-            
-            // Close all dropdowns when closing menu
-            if (isExpanded) {
-                const dropdownMenus = document.querySelectorAll('.dropdown-menu');
-                dropdownMenus.forEach(menu => menu.classList.remove('show'));
+        if (navToggle) {
+            if (navToggle) {
+                navToggle.addEventListener('click', function() {
+                    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+                    navToggle.setAttribute('aria-expanded', !isExpanded);
+                    navMenu.classList.toggle('active');
+                
+                    // Close all dropdowns when closing menu
+                    if (isExpanded) {
+                        const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+                        dropdownMenus.forEach(menu => menu.classList.remove('show'));
+                    }
+                });
             }
-        });
         
         const navLinks = document.querySelectorAll('.nav-menu a:not(.dropdown > a)');
         navLinks.forEach(link => {
@@ -486,50 +488,50 @@ document.addEventListener('DOMContentLoaded', function() {
     const modalImage = document.getElementById('modalImage');
     const modalCaption = document.getElementById('modalTitle');
     const modalClose = document.querySelector('.modal-close');
-    
-    galleryItems.forEach(item => {
-        item.addEventListener('click', function() {
-            const img = this.querySelector('img');
-            const title = this.querySelector('.gallery-overlay h3')?.textContent || '';
-            const description = this.querySelector('.gallery-overlay p')?.textContent || '';
-            
-            modal.classList.add('active');
-            modalImage.src = img.dataset.full || img.src;
-            modalImage.alt = img.alt;
-            modalCaption.textContent = title + (description ? ' - ' + description : '');
-            
-            document.body.style.overflow = 'hidden';
-            modalClose.focus();
+
+    if (modal && modalImage && modalCaption && modalClose && galleryItems) {
+        galleryItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const img = this.querySelector('img');
+                const title = this.querySelector('.gallery-overlay h3')?.textContent || '';
+                const description = this.querySelector('.gallery-overlay p')?.textContent || '';
+
+                modal.classList.add('active');
+                modalImage.src = img.dataset.full || img.src;
+                modalImage.alt = img.alt;
+                modalCaption.textContent = title + (description ? ' - ' + description : '');
+
+                document.body.style.overflow = 'hidden';
+                modalClose.focus();
+            });
+
+            item.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
         });
-        
-        item.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                this.click();
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        modalClose.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                closeModal();
             }
         });
-    });
-    
-    function closeModal() {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
     }
-    
-    if (modalClose) {
-        modalClose.addEventListener('click', closeModal);
-    }
-    
-    modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
-            closeModal();
-        }
-    });
-    
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && modal.classList.contains('active')) {
-            closeModal();
-        }
-    });
     
     // Contact form
     const contactForm = document.querySelector('.contact-form');

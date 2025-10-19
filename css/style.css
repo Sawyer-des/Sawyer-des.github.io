@@ -117,6 +117,11 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.2;
 }
 
+/* Mobile-only nav item: hidden by default on larger screens */
+.all-galleries-link {
+    display: none;
+}
+
 h1 {
     font-size: 2.5rem;
 }
@@ -1075,9 +1080,30 @@ button {
         --spacing-xl: 4rem;
     }
     
-    /* Fix background scrolling issue on mobile */
+    /* Mobile: stationary full-viewport background without jank */
     body, .hero {
-        background-attachment: scroll !important;
+        background-attachment: scroll !important; /* disable problematic fixed */
+    }
+    body {
+        background-image: none !important; /* prevent double backgrounds */
+        background-color: transparent;
+        position: relative;
+    }
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background-image: url('../images/background/background.webp');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: cover;
+        z-index: -1; /* sit behind all content */
+        pointer-events: none;
+        transform: translateZ(0);
+    }
+    .hero {
+        background-image: none !important; /* let global bg show through */
+        background-color: transparent;
     }
     
     .nav-toggle {
@@ -1283,11 +1309,12 @@ button {
 
 /* Extra Small Mobile */
 @media (max-width: 360px) {
-    .container {
-        padding: 0 0.5rem;
-    }
-    
-    .section {
+    .dropdown-menu a {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        text-align: center;
+        display: block;
+        justify-content: center;
+        align-items: center;
         margin: 0.5rem 0.25rem;
     }
     
@@ -1686,26 +1713,33 @@ button {
 
 /* Mobile Dropdown */
 @media (max-width: 768px) {
-    .dropdown {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    /* Show All Galleries link only on mobile */
+    .dropdown-menu .all-galleries-link {
+        display: block;
+        font-weight: 600;
+        padding: var(--spacing-xs) var(--spacing-sm);
+        border-bottom: 1px solid var(--border-color);
     }
-    
+
     .dropdown-menu {
-        position: static;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
         box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         background-color: #e9ecef;
         padding: var(--spacing-xs) var(--spacing-sm);
         margin-top: var(--spacing-xs);
-        margin-left: auto;
-        margin-right: auto;
         border-left: none;
         border-top: 3px solid var(--primary-color);
         border-radius: 4px;
-        width: calc(100% - var(--spacing-md));
-        max-width: 280px;
+        max-width: 300px;
+        width: 100%;
+        text-align: center;
+        z-index: 1001;
+        display: none !important;
+    }
+    .dropdown-menu.show {
+        display: block !important;
     }
     
     .dropdown > a {
@@ -1759,6 +1793,11 @@ button {
 
 /* Additional Styles for Navbar Dropdown Menu - Desktop Only */
 @media (min-width: 769px) {
+    /* Hide mobile-only All Galleries link on desktop */
+    .dropdown-menu .all-galleries-link {
+        display: none !important;
+    }
+
     .navbar .dropdown-menu {
         background: #212529;
         color: #fff;
