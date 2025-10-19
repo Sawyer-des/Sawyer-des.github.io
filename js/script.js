@@ -348,6 +348,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
             navToggle.setAttribute('aria-expanded', !isExpanded);
             navMenu.classList.toggle('active');
+            
+            // Close all dropdowns when closing menu
+            if (isExpanded) {
+                const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+                dropdownMenus.forEach(menu => menu.classList.remove('show'));
+            }
         });
         
         const navLinks = document.querySelectorAll('.nav-menu a:not(.dropdown > a)');
@@ -355,6 +361,9 @@ document.addEventListener('DOMContentLoaded', function() {
             link.addEventListener('click', function() {
                 navMenu.classList.remove('active');
                 navToggle.setAttribute('aria-expanded', 'false');
+                // Close all dropdowns
+                const dropdownMenus = document.querySelectorAll('.dropdown-menu');
+                dropdownMenus.forEach(menu => menu.classList.remove('show'));
             });
         });
     }
@@ -368,12 +377,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (dropdownLink && dropdownMenu) {
             // Handle click/touch on mobile to toggle dropdown instead of navigate
             dropdownLink.addEventListener('click', function(e) {
-                // Check if mobile menu is active (viewport < 768px)
                 const isMobile = window.innerWidth < 768;
-                
                 if (isMobile) {
                     e.preventDefault();
-                    e.stopPropagation(); // Prevent event from bubbling
                     dropdownMenu.classList.toggle('show');
                 }
             });

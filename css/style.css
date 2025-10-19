@@ -1111,6 +1111,12 @@ button {
     .nav-menu {
         display: flex;
         flex-direction: column;
+        align-items: center;
+    }
+    
+    .nav-menu li {
+        width: 100%;
+        text-align: center;
     }
     
     .nav-menu li:nth-child(1) { order: 1; } /* Home */
@@ -1123,6 +1129,8 @@ button {
         font-size: 1.1rem;
         padding: var(--spacing-sm);
         border-bottom: 1px solid var(--border-color);
+        text-align: center;
+        display: block;
     }
     
     .nav-menu a:hover,
@@ -1138,6 +1146,7 @@ button {
     .dropdown-menu a {
         color: var(--bg-dark);
         font-size: 1rem;
+        text-align: center;
     }
     
     .dropdown-menu a:hover,
@@ -1677,28 +1686,57 @@ button {
 
 /* Mobile Dropdown */
 @media (max-width: 768px) {
+    .dropdown {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
     .dropdown-menu {
         position: static;
         box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         background-color: #e9ecef;
-        padding: var(--spacing-xs) var(--spacing-md);
+        padding: var(--spacing-xs) var(--spacing-sm);
         margin-top: var(--spacing-xs);
-        border-left: 3px solid var(--primary-color);
+        margin-left: auto;
+        margin-right: auto;
+        border-left: none;
+        border-top: 3px solid var(--primary-color);
         border-radius: 4px;
+        width: calc(100% - var(--spacing-md));
+        max-width: 280px;
     }
     
     .dropdown > a {
         font-weight: 600;
+        width: 100%;
+        text-align: center;
     }
     
     .dropdown > a::after {
         content: ' ▼';
         font-size: 0.8em;
         margin-left: 0.5rem;
+        transition: transform 0.3s ease;
+    }
+    
+    .dropdown-menu.show + a::after,
+    .dropdown > a.active::after {
+        transform: rotate(180deg);
+    }
+    
+    .dropdown-menu li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
     }
     
     .dropdown-menu a {
-        padding-left: var(--spacing-md);
+        padding: var(--spacing-xs) var(--spacing-sm);
+        text-align: center;
+        display: block;
     }
     
     .dropdown:hover .dropdown-menu,
